@@ -1,11 +1,13 @@
 import React from "react";
 import ProductsList from "./components/ProductsList";
+import Layout from "./components/Layout";
 
 function App() {
   return (
-    <div>
+    <Layout className="min-h-screen ">
+
       <ProductsList />
-    </div>
+    </Layout>
   );
 }
 
