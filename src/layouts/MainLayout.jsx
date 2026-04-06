@@ -1,9 +1,10 @@
 import { useState } from "react";
-import Header from "./Header";
-import ShoppingCart from "./ShoppingCart";
+import { Outlet } from "react-router";
+import Header from "../components/common/Header";
+import ShoppingCart from "../components/common/ShoppingCart";
 import CartContext from "../context/CartContext";
 
-function Layout({ children }) {
+function MainLayout() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cart, setCart] = useState([]);
 
@@ -13,11 +14,10 @@ function Layout({ children }) {
         <Header setIsCartOpen={setIsCartOpen} />
         <ShoppingCart />
 
-        {children}
-        
+        <Outlet />
       </div>
     </CartContext>
   );
 }
 
-export default Layout;
+export default MainLayout;

@@ -1,25 +1,34 @@
-import { useEffect, useState } from "react";
-import { apiUrl } from "../utils/api";
+import { useMemo, useState } from "react";
+import { fetchApi } from "../utils/api";
 
 export default function useProducts() {
   const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const getProducts = async () => {
-    try {
-      const response = await fetch(apiUrl("/products?offset=10&limit=10"));
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+
+  const getAll = useMemo(
+    () => async () => {
+      try {
+        const products = await fetchApi("/products?offset=10&limit=10");
+        setProducts(products);
+      } finally {
+        setIsLoading(false);
       }
-      const result = await response.json();
-      setProducts(result);
-    } catch (error) {
-      console.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  useEffect(() => {
-    getProducts();
-  }, []);
-  return { products, isLoading, getProducts };
+    },
+    [],
+  );
+
+  const getOne = useMemo(
+    () => async (id) => {
+      try {
+        const product = await fetchApi(`/products/${id}`);
+        setProduct(product);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [],
+  );
+
+  return { products, isLoading, getAll, getOne, product };
 }

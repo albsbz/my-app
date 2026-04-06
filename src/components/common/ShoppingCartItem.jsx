@@ -1,6 +1,6 @@
 import { ArchiveBoxXMarkIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import CartContext from "../context/CartContext";
+import CartContext from "../../context/CartContext";
 import QuantitySelector from "./QuantitySelector";
 
 function ShoppingCartItem({ product }) {
@@ -10,7 +10,7 @@ function ShoppingCartItem({ product }) {
     setCart([...cart.filter((p) => p.id !== id)]);
     console.log(cart);
   };
-  const updateCartItemQuantity = (id,  newQuantity) => {
+  const updateCartItemQuantity = (id, newQuantity) => {
     setCart(
       cart.map((p) => {
         if (p.id === id) {
@@ -36,9 +36,12 @@ function ShoppingCartItem({ product }) {
           </a>
           <p className="mt-1 text-gray-600">{product.price} Euro</p>
         </div>
-        <QuantitySelector quantity={product.quantity} updateCartItemQuantity={(newQuantity)=>{
-          updateCartItemQuantity(product.id,newQuantity);
-        }} />
+        <QuantitySelector
+          quantity={product.quantity}
+          updateCartItemQuantity={(newQuantity) => {
+            updateCartItemQuantity(product.id, newQuantity);
+          }}
+        />
         <div
           className="flex-grow:3 mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
           onClick={() => {

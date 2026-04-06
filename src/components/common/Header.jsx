@@ -1,4 +1,5 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router";
 
 function Header({ setIsCartOpen }) {
   return (
@@ -8,13 +9,15 @@ function Header({ setIsCartOpen }) {
         className="mx-auto flex items-center justify-between p-2 lg:px-8 bg-gray-100  top-0 z-10 transform  md:hover:h-10 transition-transform duration-300 ease-in-out"
       >
         <div className="flex lg:flex-1 ">
-          <a href="#" className="-m-1.5 p-1.5 hidden group-hover/header:block">
+          <Link
+            to="/"
+            className="-m-1.5 p-1.5 hidden group-hover/header:block"
+          >
             <span className=" text-indigo-600 uppercase">My Shop</span>
-          </a>
+          </Link>
         </div>
 
         <div className="flex  flex-1 justify-end">
-        
           <button
             className="columns-1 items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 hidden group-hover/header:flex"
             onClick={(e) => {
