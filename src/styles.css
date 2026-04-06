@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@utility anchor-* {
+  anchor-name: --value([*]);
+}
+
+@utility target-* {
+  position: absolute;
+  position-anchor: --value([*]);
+
+}
+
+@utility position-area-* {
+	  position-area: --value([*])
+}
