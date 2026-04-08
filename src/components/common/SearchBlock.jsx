@@ -1,25 +1,70 @@
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useRef, useState, useCallback, useContext } from "react";
+import { debounce } from "../../utils/other";
+import useProducts from "../../hooks/useProducts";
+import ProductContext from "../../context/ProductContext";
 
 function SearchBlock() {
   const [showInput, setShowInput] = useState(false);
-  return (
-    <>
-      <button onClick={() => setShowInput(!showInput)}>
-        <MagnifyingGlassIcon className="h-4 w-4 text-mauve-800" />
-      </button>
+  const [searchTerm, setSearchTerm] = useState("");
+  const refInput = useRef(null);
+  const { getByFilter, products } = useProducts();
+  const { setProducts } = useContext(ProductContext);
 
+  const debouncedSearchRef = useRef();
+
+  useEffect(() => {
+    debouncedSearchRef.current = debounce((term) => {
+      getByFilter(term);
+    }, 300);
+  }, [getByFilter]);
+
+  const debouncedSearch = useCallback((term) => {
+    debouncedSearchRef.current(term);
+  }, []);
+
+  useEffect(() => {
+    setProducts(products);
+  }, [products, setProducts]);
+
+  useEffect(() => {
+    if (searchTerm) {
+      debouncedSearch(searchTerm);
+    }
+  }, [searchTerm, debouncedSearch]);
+
+  useEffect(() => {
+    refInput.current.focus();
+  }, [showInput]);
+
+  return (
+    <div>
+      <button
+        onClick={() => setShowInput(!showInput)}
+        className="cursor-pointer"
+      >
+        {showInput ? (
+          <XMarkIcon className="h-4 w-4 text-mauve-800" />
+        ) : (
+          <MagnifyingGlassIcon className="h-4 w-4 text-mauve-800" />
+        )}
+      </button>
       <div
-        className={` ${showInput ? "flex" : "hidden"} items-center rounded-md bg-white pr-3 outline-1 outline-gray-300`}
+        className={`items-center rounded-md bg-white  outline-1 outline-gray-300  ${showInput ? "group-hover/header:block" : "lg:hidden"} target-[--header-anchor] mt-10 position-area-[bottom_span-all] `}
       >
         <input
           id="price"
           type="text"
           name="price"
-          className="block grow  p-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+          ref={refInput}
+          className={`  grow  p-1 text-base text-gray-900  focus:outline-none sm:text-sm/6 `}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
       </div>
-    </>
+    </div>
   );
 }
 

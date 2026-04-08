@@ -2,6 +2,7 @@ import { ArchiveBoxXMarkIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import CartContext from "../../context/CartContext";
 import QuantitySelector from "./QuantitySelector";
+import { Link } from "react-router";
 
 function ShoppingCartItem({ product }) {
   const { cart, setCart } = useContext(CartContext);
@@ -21,36 +22,36 @@ function ShoppingCartItem({ product }) {
     );
   };
   return (
-    <div className="p-4">
-      <div className="group relative flex justify-between rounded-lg p-4 hover:bg-gray-50">
-        <div className="mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+    <div className="group grid grid-cols-subgrid items-center  hover:bg-gray-50  p-4 col-span-4">
+      <div className="mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+        <Link to={`/product/${product.id}`} className="group">
           <img
             src={product.images[0]}
             alt={product.title}
             className="size-10 text-gray-600 group-hover:text-indigo-600"
           />
-        </div>
-        <div>
-          <a href="#" className="font-semibold text-gray-900">
-            {product.title}
-          </a>
-          <p className="mt-1 text-gray-600">{product.price} Euro</p>
-        </div>
-        <QuantitySelector
-          quantity={product.quantity}
-          updateCartItemQuantity={(newQuantity) => {
-            updateCartItemQuantity(product.id, newQuantity);
-          }}
-        />
-        <div
-          className="flex-grow:3 mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
-          onClick={() => {
-            console.log("delete", product.id);
-            deleteCartItem(product.id);
-          }}
-        >
-          <ArchiveBoxXMarkIcon className="size-6" />
-        </div>
+        </Link>
+      </div>
+      <div>
+        <a href="#" className="font-semibold text-gray-900">
+          {product.title}
+        </a>
+        <p className="mt-1 text-gray-600">{product.price} Euro</p>
+      </div>
+      <QuantitySelector
+        quantity={product.quantity}
+        updateCartItemQuantity={(newQuantity) => {
+          updateCartItemQuantity(product.id, newQuantity);
+        }}
+      />
+      <div
+        className=" bg-gray-50 group-hover:bg-white"
+        onClick={() => {
+          console.log("delete", product.id);
+          deleteCartItem(product.id);
+        }}
+      >
+        <ArchiveBoxXMarkIcon className="size-6 cursor-pointer" />
       </div>
     </div>
   );
