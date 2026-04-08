@@ -9,7 +9,6 @@ function ShoppingCartItem({ product }) {
 
   const deleteCartItem = (id) => {
     setCart([...cart.filter((p) => p.id !== id)]);
-    console.log(cart);
   };
   const updateCartItemQuantity = (id, newQuantity) => {
     setCart(

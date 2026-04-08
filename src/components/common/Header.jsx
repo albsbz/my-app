@@ -1,13 +1,14 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router";
 import SearchBlock from "./SearchBlock";
+import { HeartIcon } from "@heroicons/react/24/solid";
 
 function Header({ setIsCartOpen }) {
   return (
-    <header className="h-12 bg-transparent sticky top-0 anchor anchor-[--header-anchor] group/header">
+    <header className="h-12 bg-transparent sticky top-0 anchor anchor-[--header-anchor] group/header z-10">
       <nav
         aria-label="Global"
-        className="mx-auto flex items-center justify-between p-2 lg:px-8 bg-gray-100  top-0 z-10 transform  lg:hover:h-10   md:h-5 transition-transform duration-400  opacity-75"
+        className="mx-auto flex items-center justify-between p-2 lg:px-8 bg-gray-100  top-0  transform  lg:hover:h-10   md:h-5 transition-transform duration-400  opacity-75"
       >
         <div className="flex lg:flex-1 ">
           <Link
@@ -21,6 +22,12 @@ function Header({ setIsCartOpen }) {
         </div>
         <SearchBlock />
         <div className="flex  flex-1 justify-end">
+          <Link
+            to="/favorites"
+            className="m-1.5 p-1.5 lg:hidden group-hover/header:block transition-transform duration-400  "
+          >
+            <HeartIcon className="h-4 w-4 text-indigo-600" />
+          </Link>
           <button
             className="columns-1 items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 lg:hidden group-hover/header:flex cursor-pointer transition-transform duration-400  "
             onClick={(e) => {

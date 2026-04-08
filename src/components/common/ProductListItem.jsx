@@ -1,10 +1,13 @@
 import { Link } from "react-router";
 import useCart from "../../hooks/useCart";
 
+import FavoriteProductIcon from "./FavoriteProductIcon";
+
 function ProductListItem({ product }) {
+
   const { addToCart } = useCart();
   return (
-    <div>
+    <div className="relative">
       <Link to={`/product/${product.id}`} className="group/product">
         <img
           alt={product.title}
@@ -12,6 +15,7 @@ function ProductListItem({ product }) {
           className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover/product:opacity-75 xl:aspect-7/8"
         />
       </Link>
+     <FavoriteProductIcon product={product} />
       <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
       <div className="mt-1 flex justify-between gap-x-1 items-baseline">
         <p className="mt-1 text-lg font-medium text-gray-900">

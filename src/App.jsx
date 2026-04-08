@@ -3,6 +3,7 @@ import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/cart" element={<ShoppingCartPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Route>
     </Routes>
   );

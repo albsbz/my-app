@@ -1,4 +1,5 @@
 import useCart from "../../hooks/useCart";
+import FavoriteProductIcon from "./FavoriteProductIcon";
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
@@ -23,12 +24,13 @@ function ProductCard({ product }) {
         </nav>
 
         {/* Image gallery */}
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8">
+        <div className="mx-auto mt-6 max-w-2xl relative sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8">
           <img
             alt={""}
             src={product.images[0]}
             className="row-span-2 aspect-3/4 size-full rounded-lg object-cover max-lg:hidden"
           />
+          <FavoriteProductIcon product={product} />
           <img
             alt={""}
             src={product.images[1]}
