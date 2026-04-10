@@ -31,16 +31,20 @@ function ProductCard({ product }) {
             className="row-span-2 aspect-3/4 size-full rounded-lg object-cover max-lg:hidden"
           />
           <FavoriteProductIcon product={product} />
-          <img
-            alt={""}
-            src={product.images[1]}
-            className="col-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden"
-          />
-          <img
-            alt={""}
-            src={product.images[2]}
-            className="col-start-2 row-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden"
-          />
+          {product.images[1] && (
+            <img
+              alt={""}
+              src={product.images[1]}
+              className="col-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden"
+            />
+          )}
+          {product.images[2] && (
+            <img
+              alt={""}
+              src={product.images[2]}
+              className="col-start-2 row-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden"
+            />
+          )}
         </div>
 
         {/* Product info */}

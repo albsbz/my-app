@@ -1,37 +1,52 @@
-import { useCallback, useState } from "react";
-import { fetchApi } from "../utils/api";
+import { useCallback, useContext, useState } from "react";
+
+import productsApi from "../services/products";
+import ErrorContext from "../context/ErrorContext";
 
 export default function useProducts() {
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { setErrorMessage } = useContext(ErrorContext);
 
   const getAll = useCallback(async () => {
     try {
-      const products = await fetchApi("/products?offset=0&limit=12");
+      const products = await productsApi.getAll();
       setProducts(products);
+    } catch {
+      setErrorMessage("Failed to fetch products");
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [setErrorMessage]);
 
-  const getByFilter = useCallback(async (title) => {
-    try {
-      const products = await fetchApi(`/products?title=${title}`);
-      setProducts(products);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const getByFilter = useCallback(
+    async (title) => {
+      try {
+        const products = await productsApi.getByFilter(title);
+        setProducts(products);
+      } catch {
+        setErrorMessage("Failed to fetch products by filter");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setErrorMessage],
+  );
 
-  const getOne = useCallback(async (id) => {
-    try {
-      const product = await fetchApi(`/products/${id}`);
-      setProduct(product);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const getOne = useCallback(
+    async (id) => {
+      try {
+        const product = await productsApi.getOne(id);
+        setProduct(product);
+      } catch {
+        setErrorMessage("Failed to fetch product");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setErrorMessage],
+  );
 
   return { products, isLoading, getAll, getOne, product, getByFilter };
 }

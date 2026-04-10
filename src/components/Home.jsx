@@ -3,6 +3,7 @@ import useProducts from "../hooks/useProducts";
 import Loader from "./common/Loader";
 import ProductsList from "./common/ProductsList";
 import ProductContext from "../context/ProductContext";
+import FilterPopover from "./common/FilterPopover";
 
 function Home() {
   const { products, isLoading, getAll } = useProducts();
@@ -18,7 +19,16 @@ function Home() {
   }, [products, contextSetProducts]);
 
   return (
-    <>{isLoading ? <Loader /> : <ProductsList products={contextProducts} />}</>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <FilterPopover />
+          <ProductsList products={contextProducts} />
+        </>
+      )}
+    </>
   );
 }
 
