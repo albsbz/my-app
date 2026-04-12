@@ -23,13 +23,13 @@ export default function useCategories() {
     }
   }, [setErrorMessage]);
 
-  const toggleAllCategories = (direction) => {
+  const toggleAllFilteredCategories = (direction) => {
     setCategories((c) =>
       c.map((category) => ({ ...category, show: direction })),
     );
   };
 
-  const toggleCategory = (title) => {
+  const toggleFilteredCategory = (title) => {
     setCategories((c) =>
       c.map((category) =>
         category.title === title
@@ -39,5 +39,5 @@ export default function useCategories() {
     );
   };
 
-  return { categories, getAll, isLoading, toggleAllCategories, toggleCategory };
+  return { categories, getAll, isLoading, toggleAllFilteredCategories, toggleFilteredCategory };
 }

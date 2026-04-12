@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useContext } from "react";
 import ProductContext from "../_context/ProductContext";
 import ProductsList from "./common/ProductsList";

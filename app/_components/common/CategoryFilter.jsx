@@ -1,10 +1,8 @@
-"use client";
-
 import { useContext } from "react";
 import ProductContext from "../../_context/ProductContext";
 
 function CategoryFilter() {
-  const { categories, toggleAllCategories, toggleCategory } =
+  const { categories, toggleAllFilteredCategories, toggleFilteredCategory } =
     useContext(ProductContext);
 
   return (
@@ -13,14 +11,14 @@ function CategoryFilter() {
       <div className="flex gap-2">
         <button
           type="button"
-          onClick={() => toggleAllCategories(true)}
+          onClick={() => toggleAllFilteredCategories(true)}
           className="text-sm text-gray-500 hover:text-gray-700"
         >
           Show all
         </button>
         <button
           type="button"
-          onClick={() => toggleAllCategories(false)}
+          onClick={() => toggleAllFilteredCategories(false)}
           className="text-sm text-gray-500 hover:text-gray-700"
         >
           Hide all
@@ -32,7 +30,7 @@ function CategoryFilter() {
             type="checkbox"
             value={title}
             checked={show}
-            onChange={() => toggleCategory(title)}
+            onChange={() => toggleFilteredCategory(title)}
           />
           {title}
         </label>

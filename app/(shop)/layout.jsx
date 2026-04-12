@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import Header from "@components/common/Header";
 import CartContext from "@context/CartContext";
 import ShoppingCartPopover from "@components/common/ShoppingCartPopover";
@@ -9,33 +9,36 @@ import useFilters from "@hooks/useFilters";
 import useCategories from "@hooks/useCategories";
 import ErrorContext from "@context/ErrorContext";
 import ErrorMessage from "@components/common/ErrorMessage";
+import {
+  getCartFromLocalStorage,
+  getFavoriteProductsFromLocalStorage,
+} from "../_utils/storage";
 
 function MainLayout({ children }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cart, setCart] = useState(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
-    const storedCart = localStorage.getItem("cart");
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
-  const [favoriteProducts, setFavoriteProducts] = useState(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
-    const storedFavoriteProducts = localStorage.getItem("favoriteProducts");
-    return storedFavoriteProducts ? JSON.parse(storedFavoriteProducts) : [];
-  });
+  const [cart, setCart] = useState([]);
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-  const { categories, toggleAllCategories, toggleCategory, getAll } =
-    useCategories();
+  const {
+    categories,
+    toggleAllFilteredCategories,
+    toggleFilteredCategory,
+    getAll: getAllCategories,
+  } = useCategories();
+  const updateStateOnLoad = useEffectEvent(() => {
+    setCart(getCartFromLocalStorage());
+    setFavoriteProducts(getFavoriteProductsFromLocalStorage());
+  }, []);
 
   const { filteredProducts } = useFilters({ products, categories });
+  useEffect(() => {
+    updateStateOnLoad();
+  }, []);
 
   useEffect(() => {
-    getAll();
-  }, [getAll]);
+    getAllCategories();
+  }, [getAllCategories]);
 
   const toggleFavoriteProduct = (product) => {
     setFavoriteProducts((prev) =>
@@ -67,9 +70,9 @@ function MainLayout({ children }) {
             isFavoriteProduct,
             toggleFavoriteProduct,
             categories,
-            toggleAllCategories,
-            toggleCategory,
-            getAll,
+            toggleAllFilteredCategories,
+            toggleFilteredCategory,
+            getAllCategories,
           }}
         >
           <div className="group" data-state={isCartOpen ? "open" : "closed"}>

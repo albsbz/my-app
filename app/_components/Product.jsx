@@ -1,4 +1,3 @@
-'use client'
 import { useEffect } from "react";
 import useProducts from "../_hooks/useProducts";
 import ProductCard from "./common/ProductCard";
