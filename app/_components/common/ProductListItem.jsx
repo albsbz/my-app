@@ -16,6 +16,7 @@ function ProductListItem({ product }) {
       </Link>
       <FavoriteProductIcon product={product} />
       <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
+      <h5 className="mt-1 text-sm text-gray-500">{product.category}</h5>
       <div className="mt-1 flex justify-between gap-x-1 items-baseline">
         <p className="mt-1 text-lg font-medium text-gray-900">
           {product.price} Euro

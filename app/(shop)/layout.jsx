@@ -25,6 +25,7 @@ function MainLayout({ children }) {
     toggleAllFilteredCategories,
     toggleFilteredCategory,
     getAll: getAllCategories,
+      showOneCategory
   } = useCategories();
   const updateStateOnLoad = useEffectEvent(() => {
     setCart(getCartFromLocalStorage());
@@ -37,8 +38,8 @@ function MainLayout({ children }) {
   }, []);
 
   useEffect(() => {
-    getAllCategories();
-  }, [getAllCategories]);
+    categories?.length === 0 && getAllCategories();
+  }, [getAllCategories, categories]);
 
   const toggleFavoriteProduct = (product) => {
     setFavoriteProducts((prev) =>
@@ -73,6 +74,7 @@ function MainLayout({ children }) {
             toggleAllFilteredCategories,
             toggleFilteredCategory,
             getAllCategories,
+            showOneCategory
           }}
         >
           <div className="group" data-state={isCartOpen ? "open" : "closed"}>

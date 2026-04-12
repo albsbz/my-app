@@ -39,5 +39,22 @@ export default function useCategories() {
     );
   };
 
-  return { categories, getAll, isLoading, toggleAllFilteredCategories, toggleFilteredCategory };
+  const showOneCategory = (title) => {
+    setCategories((c) =>
+      c.map((category) =>
+        category.title === title
+          ? { ...category, show: true }
+          : { ...category, show: false },
+      ),
+    );
+  };
+
+  return {
+    categories,
+    getAll,
+    isLoading,
+    toggleAllFilteredCategories,
+    toggleFilteredCategory,
+    showOneCategory,
+  };
 }

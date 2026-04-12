@@ -1,7 +1,9 @@
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import useCart from "../../_hooks/useCart";
 import FavoriteProductIcon from "./FavoriteProductIcon";
+import Link from "next/link";
 
-function ProductCard({ product }) {
+function ProductCard({ product, showOneCategory }) {
   const { addToCart } = useCart();
   return (
     <div className="bg-white">
@@ -12,13 +14,44 @@ function ProductCard({ product }) {
             className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
           >
             <li className="text-sm">
-              <a
+              <Link
+                href={"/"}
+                className="font-medium text-gray-500 hover:text-gray-600"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <ChevronRightIcon
+                className="h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </li>
+            <li className="text-sm">
+              <Link
+                href={"/"}
+                className="font-medium text-gray-500 hover:text-gray-600"
+                onNavigate={(e) => {
+                  showOneCategory(product.category);
+                }}
+              >
+                {product.category}
+              </Link>
+            </li>
+            <li>
+              <ChevronRightIcon
+                className="h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </li>
+            <li className="text-sm">
+              <Link
                 href={""}
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
                 {product.title}
-              </a>
+              </Link>
             </li>
           </ol>
         </nav>

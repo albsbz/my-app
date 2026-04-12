@@ -19,7 +19,7 @@ function ShoppingCartPopover({ setIsCartOpen }) {
         className="absolute top-2 right-5 text-gray-400 hover:text-gray-500"
         onClick={() => setIsCartOpen(false)}
       >
-        <XMarkIcon className="h-5 w-5 cursor-pointer" aria-hidden="true " />
+        <XMarkIcon className="h-5 w-5 cursor-pointer" aria-hidden />
       </button>
       <ShoppingCartList cart={cart} />
       <Link

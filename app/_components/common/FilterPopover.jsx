@@ -4,7 +4,7 @@ import { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-function FilterPopover({ categories }) {
+function FilterPopover() {
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(true);
@@ -29,7 +29,7 @@ function FilterPopover({ categories }) {
           >
             <XMarkIcon className="h-5 w-5" />
           </button>
-          <CategoryFilter categories={categories} />
+          <CategoryFilter />
         </>
       )}
     </div>
