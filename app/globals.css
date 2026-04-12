@@ -7,9 +7,13 @@
 @utility target-* {
   position: absolute;
   position-anchor: --value([*]);
-
 }
 
 @utility position-area-* {
-	  position-area: --value([*])
+  position-area: --value([*]);
+}
+
+a,
+button {
+  cursor: pointer;
 }

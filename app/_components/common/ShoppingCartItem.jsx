@@ -48,7 +48,6 @@ function ShoppingCartItem({ product }) {
       <div
         className=" bg-gray-50 group-hover:bg-white"
         onClick={() => {
-          console.log("delete", product.id);
           deleteCartItem(product.id);
         }}
       >

@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Redi Store App
 
-## Getting Started
+Redi Store App is a small storefront built with Next.js App Router, React 19, and Tailwind CSS. It consumes the DummyJSON products API and includes product discovery, category filtering, favorites, and a client-side shopping cart.
 
-First, run the development server:
+## Project Bootstrap
+
+This project was bootstrapped with `create-next-app` and then extended into a multi-route shop experience using the App Router.
+
+Core stack:
+
+- Next.js 16
+- React 19
+- Tailwind CSS 4
+- Heroicons
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create your local environment file:
+
+```bash
+cp example.env .env.local
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open `http://localhost:3000` in the browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app expects the following public environment variable:
 
-## Learn More
+```env
+NEXT_PUBLIC_API_URL=https://dummyjson.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Available Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` starts the local development server.
+- `npm run build` creates a production build.
+- `npm run start` serves the production build.
+- `npm run lint` runs ESLint.
+- `npm run lint:fix` runs ESLint with automatic fixes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Implemented Features
 
-## Deploy on Vercel
+- Product listing page backed by the DummyJSON products API.
+- Product details page at `/product/[id]`.
+- Debounced search for products by title.
+- Category-based filtering with toggle controls.
+- Favorites page with persisted favorite products.
+- Shopping cart with quantity aggregation and total price calculation.
+- Cart and favorites persistence in `localStorage`.
+- Shared state management through React context providers.
+- Loading and error UI for asynchronous product and category fetches.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Routes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` shows the storefront home page and product catalog.
+- `/favorites` shows saved favorite products.
+- `/cart` shows the shopping cart and total amount.
+- `/product/[id]` shows a single product view.
+
+## Project Structure
+
+```text
+app/
+	(shop)/
+		cart/
+		favorites/
+		product/[id]/
+	_components/
+	_context/
+	_hooks/
+	_services/
+	_utils/
+```
+
+## Notes
+
+- Product and category data are fetched from the configured API base URL.
+- Cart and favorites are managed on the client side and restored from browser storage on load.
