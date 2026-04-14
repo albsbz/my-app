@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "checkJs": false,
+    "noImplicitAny": false,
+    "jsx": "preserve",
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./app/_components/*"],
@@ -8,5 +11,6 @@
       "@utils/*": ["./app/_utils/*"],
       "@context/*": ["./app/_context/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", ".next"]
 }

@@ -27,6 +27,9 @@ const eslintConfig = defineConfig([
         },
       },
     },
+    rules: {
+      "no-undef": "error",
+    },
   },
 ]);
 
