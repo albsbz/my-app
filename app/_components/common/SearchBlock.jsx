@@ -27,7 +27,9 @@ function SearchBlock() {
   }, []);
 
   useEffect(() => {
-    setProducts(products);
+    if (products.length) {
+      setProducts(products);
+    }
   }, [products, setProducts]);
 
   useEffect(() => {
@@ -44,8 +46,9 @@ function SearchBlock() {
     <div>
       <button
         onClick={() => setShowInput(!showInput)}
-        className="cursor-pointer"
+        className="cursor-pointer flex justify-center items-center"
       >
+        <span className="mr-2 font-medium text-gray-900 text-lg">Search</span>
         {showInput ? (
           <XMarkIcon className="h-4 w-4 text-mauve-800" />
         ) : (
@@ -53,14 +56,14 @@ function SearchBlock() {
         )}
       </button>
       <div
-        className={`items-center rounded-md bg-white  outline-1 outline-gray-300  ${showInput ? "group-hover/header:block" : "lg:hidden"} target-[--header-anchor] mt-10 position-area-[bottom_span-all] `}
+        className={`items-center rounded-md bg-white  outline-1 outline-gray-300  ${showInput ? "group-hover/header:block" : "lg:hidden"} mt-2 mb-2 `}
       >
         <input
           id="price"
           type="text"
           name="price"
           ref={refInput}
-          className={`  grow  p-1 text-base text-gray-900  focus:outline-none sm:text-sm/6 `}
+          className={`  grow  p-1 text-base text-gray-900  focus:outline-none sm:text-sm/6`}
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}

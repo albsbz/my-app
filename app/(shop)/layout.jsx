@@ -15,12 +15,18 @@ function MainLayout({ children }) {
     <ErrorProvider>
       <CartProvider>
         <ProductProvider>
-          <div className="group" data-state={isCartOpen ? "open" : "closed"}>
+          <div
+            className="group grid grid-rows-[min-content_1fr] "
+            data-state={isCartOpen ? "open" : "closed"}
+          >
+            <div className="h-screen col-span-full row-[1/span_2]"></div>
             <Header setIsCartOpen={setIsCartOpen} />
-            <ErrorMessage />
-            <ShoppingCartPopover setIsCartOpen={setIsCartOpen} />
 
-            {children}
+            <div className="col-start-1 row-start-2 -mt-8">
+              <ErrorMessage />
+              <ShoppingCartPopover setIsCartOpen={setIsCartOpen} />
+              {children}
+            </div>
           </div>
         </ProductProvider>
       </CartProvider>
