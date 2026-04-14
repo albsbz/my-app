@@ -2,6 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import useCart from "../../_hooks/useCart";
 import FavoriteProductIcon from "./FavoriteProductIcon";
 import Link from "next/link";
+import Button from "./Button";
 
 function ProductCard({ product, showOneCategory }) {
   const { addToCart } = useCart();
@@ -94,19 +95,16 @@ function ProductCard({ product, showOneCategory }) {
             <p className="text-3xl tracking-tight text-gray-900">
               {product.price} Euro
             </p>
-            <button
-              type="submit"
-              className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
+            <Button
               onClick={() => {
                 addToCart(product);
               }}
-            >
-              Add to cart
-            </button>
+              text="Add to cart"
+              styles="w-[100%]"
+            />
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pr-8 lg:pb-16">
-            {/* Description and details */}
             <div>
               <h3 className="sr-only">Description</h3>
 

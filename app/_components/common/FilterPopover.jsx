@@ -4,6 +4,7 @@ import { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import SearchBlock from "./SearchBlock";
+import Button from "./Button";
 
 function FilterPopover() {
   const [open, setOpen] = useState(false);
@@ -22,6 +23,7 @@ function FilterPopover() {
       ) : (
         <div className="flex flex-col">
           <SearchBlock />
+       
           <button
             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
             onClick={(e) => {

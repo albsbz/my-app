@@ -1,20 +1,30 @@
 "use client";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon as ShoppingCartIconEmpty } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-import { HeartIcon } from "@heroicons/react/24/solid";
+import { HeartIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import { useContext, useState } from "react";
+import CartContext from "@/app/_context/CartContext";
 
-function Header({ setIsCartOpen }) {
+function Header({ setIsCartOpen, hideHeader }) {
+  const { cart } = useContext(CartContext);
   return (
-    <header className=" bg-transparent sticky col-start-1 row-start-1  top-0 anchor anchor-[--header-anchor] group/header z-10 overflow-hidden h-25">
+    <header
+      className={`bg-transparent sticky col-start-1 row-start-1  top-0 anchor anchor-[--header-anchor] group/header z-10 overflow-hidden ${hideHeader ? "h-10" : "h-25"} transition-all duration-300 ease-in-out`}
+    >
       <nav
         aria-label="Global"
-        className="mx-auto h-15 flex items-center justify-between p-2 lg:px-8 bg-gray-100  top-0  transform  lg:hover:h-25  md:h-15 transition-transform duration-400  opacity-90"
+        className={`mx-auto flex items-center justify-between ${hideHeader ? "p-0" : "p-2"} lg:px-8 bg-gray-100  top-0  transform     opacity-90 transition-all duration-300 ease-in-out`}
       >
         <div className="flex lg:flex-1 ">
-          <Link href="/" className="-m-1.5 p-1.5 block  ">
-            <Image src="/logo.png" alt="Logo" width={100} height={100} />
+          <Link href="/" className=" block  ">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={hideHeader ? 60 : 100}
+              height={hideHeader ? 60 : 100}
+            />
           </Link>
         </div>
         <div className="flex  flex-1 justify-end">
@@ -22,7 +32,7 @@ function Header({ setIsCartOpen }) {
             href="/favorites"
             className="m-1.5 p-1.5 flex items-center hover:bg-gray-200 rounded-md transition-colors duration-300 px-2"
           >
-            <span className=" text-olive-900 font-medium" >Favorites</span>
+            <span className=" text-olive-900 font-medium">Favorites</span>
             <HeartIcon className="h-4 w-4 text-olive-900 ml-1 " />
           </Link>
           <button
@@ -33,7 +43,11 @@ function Header({ setIsCartOpen }) {
             }}
           >
             <span className=" text-olive-900 font-medium ">Cart</span>
-            <ShoppingCartIcon className="h-4 w-4 text-olive-900 ml-1 " />
+            {cart.length === 0 ? (
+              <ShoppingCartIconEmpty className="h-4 w-4 text-olive-900 ml-1 " />
+            ) : (
+              <ShoppingCartIcon className="h-4 w-4 text-red-900 ml-1 " />
+            )}
           </button>
         </div>
       </nav>

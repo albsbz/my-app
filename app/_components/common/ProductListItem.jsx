@@ -1,4 +1,5 @@
 import useCart from "../../_hooks/useCart";
+import Button from "./Button";
 
 import FavoriteProductIcon from "./FavoriteProductIcon";
 import Link from "next/link";
@@ -21,14 +22,12 @@ function ProductListItem({ product }) {
         <p className="mt-1 text-lg font-medium text-gray-900">
           {product.price} Euro
         </p>
-        <button
-          className="mt-4  bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 cursor-pointer"
-          onClick={() => {
+        <Button
+          handler={() => {
             addToCart(product);
           }}
-        >
-          Add to cart
-        </button>
+          text="Add to cart"
+        />
       </div>
     </div>
   );
