@@ -7,21 +7,9 @@ import QuantitySelector from "./QuantitySelector";
 import Link from "next/link";
 
 function ShoppingCartItem({ product }) {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, updateCartItemQuantity, deleteCartItem } = useContext(CartContext);
 
-  const deleteCartItem = (id) => {
-    setCart([...cart.filter((p) => p.id !== id)]);
-  };
-  const updateCartItemQuantity = (id, newQuantity) => {
-    setCart(
-      cart.map((p) => {
-        if (p.id === id) {
-          return { ...p, quantity: newQuantity };
-        }
-        return p;
-      }),
-    );
-  };
+ 
   return (
     <div className="group grid grid-cols-subgrid items-center  hover:bg-gray-50  p-4 col-span-4">
       <div className="mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">

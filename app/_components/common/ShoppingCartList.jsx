@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
+import CartContext from "@/app/_context/CartContext";
 
-function ShoppingCartList({ cart }) {
+function ShoppingCartList() {
+    const { cart } = useContext(CartContext);
   return (
     <div className="flex flex-direction-column align-middle justify-center">
       <div className="mt-4 grid grid-cols-[minmax(0, 1fr)_minmax(0, 1fr)_minmax(0, 1fr)_minmax(0, 25px)] gap-4">
@@ -8,7 +11,7 @@ function ShoppingCartList({ cart }) {
           ? [...cart]
               .reverse()
               .map((product) => (
-                <ShoppingCartItem key={product.id} product={product} />
+                <ShoppingCartItem key={product.id} product={product}  />
               ))
           : "Empty cart"}
       </div>

@@ -1,11 +1,12 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import useCart from "../../_hooks/useCart";
 import FavoriteProductIcon from "./FavoriteProductIcon";
 import Link from "next/link";
 import Button from "./Button";
+import { useContext } from "react";
+import CartContext from "@/app/_context/CartContext";
 
 function ProductCard({ product, showOneCategory }) {
-  const { addToCart } = useCart();
+  const { addToCart } = useContext(CartContext);
   return (
     <div className="bg-white">
       <div className="pt-6">

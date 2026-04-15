@@ -1,13 +1,14 @@
 "use client";
 import ShoppingCartList from "./common/ShoppingCartList";
-import useCart from "../_hooks/useCart";
 import { CalculateTotal } from "../_utils/other";
+import { useContext } from "react";
+import CartContext from "../_context/CartContext";
 
 function ShoppingCart() {
-  const { cart } = useCart();
+   const { cart } = useContext(CartContext);
   return (
     <div className="mx-auto max-w-2xl px-4 py-3 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
-      <ShoppingCartList cart={cart} />
+      <ShoppingCartList  />
       <div className="flex items-center justify-center w-full gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
         Total: {CalculateTotal(cart).toFixed(2)} Euro
       </div>
