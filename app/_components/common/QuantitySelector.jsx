@@ -2,7 +2,6 @@ function QuantitySelector({ quantity, updateCartItemQuantity }) {
   return (
     <div className="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 h-10 max-w-16">
       <input
-        id="quantity"
         type="text"
         name="quantity"
         value={quantity}

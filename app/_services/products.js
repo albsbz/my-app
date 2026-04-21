@@ -1,7 +1,7 @@
 import { fetchApi } from "../_utils/api";
 
 const getAll = async () => {
-  const { products } = await fetchApi("/products?offset=0&limit=12");
+  const { products } = await fetchApi("/products");
   return products;
 };
 

@@ -12,15 +12,15 @@ function SearchBlock() {
   const [searchTerm, setSearchTerm] = useState("");
   const refInput = useRef(null);
   const { getByFilter, products } = useProducts();
-  const { setProducts } = useContext(ProductContext);
+  const { setProducts, setSearch } = useContext(ProductContext);
 
   const debouncedSearchRef = useRef();
 
   useEffect(() => {
     debouncedSearchRef.current = debounce((term) => {
-      getByFilter(term);
+      setSearch(term);
     }, 300);
-  }, [getByFilter]);
+  }, [setSearch]);
 
   const debouncedSearch = useCallback((term) => {
     debouncedSearchRef.current(term);
@@ -33,9 +33,7 @@ function SearchBlock() {
   }, [products, setProducts]);
 
   useEffect(() => {
-    if (searchTerm) {
-      debouncedSearch(searchTerm);
-    }
+    debouncedSearch(searchTerm);
   }, [searchTerm, debouncedSearch]);
 
   useEffect(() => {

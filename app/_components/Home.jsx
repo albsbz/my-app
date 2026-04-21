@@ -8,17 +8,9 @@ import ProductContext from "../_context/ProductContext";
 import FilterPopover from "./common/FilterPopover";
 
 function Home() {
-  const { products, isLoading, getAll } = useProducts();
-  const { products: contextProducts, setProducts: contextSetProducts } =
-    useContext(ProductContext);
+  const { products, allProducts, setAllProducts, isLoading } =
+  useContext(ProductContext);
 
-  useEffect(() => {
-    getAll();
-  }, [getAll]);
-
-  useEffect(() => {
-    contextSetProducts(products);
-  }, [products, contextSetProducts]);
 
   return (
     <>
@@ -27,7 +19,7 @@ function Home() {
       ) : (
         <>
           <FilterPopover />
-          <ProductsList products={contextProducts} />
+          <ProductsList products={products} />
         </>
       )}
     </>

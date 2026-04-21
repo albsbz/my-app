@@ -22,12 +22,16 @@ function ShoppingCartPopover({ setIsCartOpen }) {
         <XMarkIcon className="h-5 w-5 cursor-pointer" aria-hidden />
       </button>
       <ShoppingCartList cart={cart} />
+      <div className="flex items-center justify-between p-3 font-semibold text-gray-900">
+        Total: {CalculateTotal(cart).toFixed(2)} Euro
+      </div>
+
       <Link
         href="/cart"
         onClick={() => setIsCartOpen(false)}
         className="flex items-center justify-center w-full gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100"
       >
-        Total: {CalculateTotal(cart).toFixed(2)} Euro
+        Go to cart
       </Link>
     </div>
   );

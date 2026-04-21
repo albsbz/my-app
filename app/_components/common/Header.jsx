@@ -1,14 +1,20 @@
 "use client";
-import { ShoppingCartIcon as ShoppingCartIconEmpty } from "@heroicons/react/24/outline";
+import {
+  ShoppingCartIcon as ShoppingCartIconEmpty,
+  HeartIcon as HeartIconEmpty,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 import { HeartIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import CartContext from "@/app/_context/CartContext";
+import Product from "../Product";
+import ProductContext from "@/app/_context/ProductContext";
 
 function Header({ setIsCartOpen, hideHeader }) {
   const { cart } = useContext(CartContext);
+  const { favoriteProducts } = useContext(ProductContext);
   return (
     <header
       className={`bg-transparent sticky col-start-1 row-start-1  top-0 anchor anchor-[--header-anchor] group/header z-10 overflow-hidden ${hideHeader ? "h-10" : "h-25"} transition-all duration-300 ease-in-out`}
@@ -33,7 +39,11 @@ function Header({ setIsCartOpen, hideHeader }) {
             className="m-1.5 p-1.5 flex items-center hover:bg-gray-200 rounded-md transition-colors duration-300 px-2"
           >
             <span className=" text-olive-900 font-medium">Favorites</span>
-            <HeartIcon className="h-4 w-4 text-olive-900 ml-1 " />
+            {favoriteProducts.length === 0 ? (
+              <HeartIconEmpty className="h-4 w-4 text-olive-900 ml-1 " />
+            ) : (
+              <HeartIcon className="h-4 w-4 text-red-600 ml-1 " />
+            )}
           </Link>
           <button
             className="columns-1 items-center text-sm font-semibold leading-6 text-gray-900 cursor-pointer  flex    hover:bg-gray-200 rounded-md transition-colors duration-300 px-2"
@@ -46,7 +56,7 @@ function Header({ setIsCartOpen, hideHeader }) {
             {cart.length === 0 ? (
               <ShoppingCartIconEmpty className="h-4 w-4 text-olive-900 ml-1 " />
             ) : (
-              <ShoppingCartIcon className="h-4 w-4 text-red-900 ml-1 " />
+              <ShoppingCartIcon className="h-4 w-4 text-indigo-600 ml-1 " />
             )}
           </button>
         </div>

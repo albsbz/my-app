@@ -1,13 +1,17 @@
 import ProductContext from "@context/ProductContext";
 import useCategories from "@hooks/useCategories";
 import { getFavoriteProductsFromLocalStorage } from "@utils/storage";
-import { useEffect, useEffectEvent, useState } from "react";
+import { use, useEffect, useEffectEvent, useMemo, useState } from "react";
 import useFilters from "@hooks/useFilters";
+import useProducts from "@/app/_hooks/useProducts";
 
 function ProductProvider({ children }) {
   const [favoriteProducts, setFavoriteProducts] = useState([]);
-  const [products, setProducts] = useState([]);
-
+  const [allProducts, setAllProducts] = useState([]);
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("default");
+  
+  const { products: fetchProducts, isLoading, getAll } = useProducts();
   const {
     categories,
     toggleAllFilteredCategories,
@@ -15,6 +19,21 @@ function ProductProvider({ children }) {
     getAll: getAllCategories,
     showOneCategory,
   } = useCategories();
+  const { filteredProducts } = useFilters({
+    products: allProducts,
+    categories,
+    search,
+    sort
+  });
+
+  useEffect(() => {
+    getAll();
+  }, [getAll]);
+
+  useEffect(() => {
+    setAllProducts(fetchProducts);
+  }, [fetchProducts, setAllProducts]);
+
   const toggleFavoriteProduct = (product) => {
     setFavoriteProducts((prev) =>
       prev.some((p) => p.id === product.id)
@@ -29,13 +48,12 @@ function ProductProvider({ children }) {
     setFavoriteProducts(getFavoriteProductsFromLocalStorage());
   }, []);
 
-  const { filteredProducts } = useFilters({ products, categories });
   useEffect(() => {
     updateStateOnLoad();
   }, []);
 
   useEffect(() => {
-    categories?.length === 0 && getAllCategories();
+    categories?.length === 0 && getAllCategories() ;
   }, [getAllCategories, categories]);
 
   useEffect(() => {
@@ -46,7 +64,8 @@ function ProductProvider({ children }) {
     <ProductContext
       value={{
         products: filteredProducts,
-        setProducts,
+        allProducts,
+        setAllProducts,
         favoriteProducts,
         isFavoriteProduct,
         toggleFavoriteProduct,
@@ -55,6 +74,10 @@ function ProductProvider({ children }) {
         toggleFilteredCategory,
         getAllCategories,
         showOneCategory,
+        isLoading,
+        search,
+        setSearch,
+        setSort,
       }}
     >
       {children}

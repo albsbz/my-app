@@ -1,8 +1,10 @@
+import NotificationContext from "@/app/_context/NotificationContext";
 import { getCartFromLocalStorage } from "@/app/_utils/storage";
 import CartContext from "@context/CartContext";
-import { use, useEffect, useEffectEvent, useState } from "react";
+import { use, useContext, useEffect, useEffectEvent, useState } from "react";
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const { setNotificationMessage } = useContext(NotificationContext);
   const productInCart = (id) => {
     return cart.find((p) => p.id === id)?.quantity;
   };
@@ -18,11 +20,13 @@ function CartProvider({ children }) {
   };
   const deleteCartItem = (id) => {
     setCart([...cart.filter((p) => p.id !== id)]);
+    setNotificationMessage("Item removed from cart");
   };
 
   const addToCart = (product) => {
     if (!productInCart(product.id)) {
       setCart([...cart, { ...product, quantity: 1 }]);
+      setNotificationMessage("Product added to cart");
       return;
     }
     setCart(
@@ -44,7 +48,7 @@ function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
   return (
-    <CartContext.Provider
+    <CartContext
       value={{
         cart,
         setCart,
@@ -55,7 +59,7 @@ function CartProvider({ children }) {
       }}
     >
       {children}
-    </CartContext.Provider>
+    </CartContext>
   );
 }
 
