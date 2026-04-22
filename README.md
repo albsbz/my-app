@@ -1,19 +1,15 @@
 # Redi Store App
 
-Redi Store App is a small storefront built with Next.js App Router, React 19, and Tailwind CSS. It consumes the DummyJSON products API and includes product discovery, category filtering, favorites, and a client-side shopping cart.
+Redi Store App is a storefront built with the Next.js App Router, React 19, and Tailwind CSS 4. It uses the DummyJSON products API and includes product browsing, filtering, favorites, and a client-side shopping cart with persisted state.
 
-## Project Bootstrap
-
-This project was bootstrapped with `create-next-app` and then extended into a multi-route shop experience using the App Router.
-
-Core stack:
+## Tech Stack
 
 - Next.js 16
 - React 19
 - Tailwind CSS 4
 - Heroicons
 
-## Setup
+## Getting Started
 
 1. Install dependencies:
 
@@ -33,7 +29,7 @@ cp example.env .env.local
 npm run dev
 ```
 
-4. Open `http://localhost:3000` in the browser.
+4. Open `http://localhost:3000` in your browser.
 
 ## Environment Variables
 
@@ -51,17 +47,16 @@ NEXT_PUBLIC_API_URL=https://dummyjson.com
 - `npm run lint` runs ESLint.
 - `npm run lint:fix` runs ESLint with automatic fixes.
 
-## Implemented Features
+## Features
 
-- Product listing page backed by the DummyJSON products API.
+- Product catalog backed by the DummyJSON products API.
 - Product details page at `/product/[id]`.
-- Debounced search for products by title.
-- Category-based filtering with toggle controls.
+- Debounced search, category filtering, and sorting controls.
 - Favorites page with persisted favorite products.
 - Shopping cart with quantity aggregation and total price calculation.
 - Cart and favorites persistence in `localStorage`.
 - Shared state management through React context providers.
-- Loading and error UI for asynchronous product and category fetches.
+- Loading, error, and notification UI for async flows.
 
 ## Routes
 
@@ -75,10 +70,14 @@ NEXT_PUBLIC_API_URL=https://dummyjson.com
 ```text
 app/
 	(shop)/
+		layout.jsx
+		page.jsx
 		cart/
 		favorites/
 		product/[id]/
 	_components/
+		common/
+		providers/
 	_context/
 	_hooks/
 	_services/
@@ -88,4 +87,4 @@ app/
 ## Notes
 
 - Product and category data are fetched from the configured API base URL.
-- Cart and favorites are managed on the client side and restored from browser storage on load.
+- Cart and favorites are restored from browser storage when the app loads.
