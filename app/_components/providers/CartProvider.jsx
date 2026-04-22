@@ -24,9 +24,9 @@ function CartProvider({ children }) {
   };
 
   const addToCart = (product) => {
+    setNotificationMessage("Product added to cart");
     if (!productInCart(product.id)) {
       setCart([...cart, { ...product, quantity: 1 }]);
-      setNotificationMessage("Product added to cart");
       return;
     }
     setCart(

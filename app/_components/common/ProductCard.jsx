@@ -97,11 +97,11 @@ function ProductCard({ product, showOneCategory }) {
               {product.price} Euro
             </p>
             <Button
-              onClick={() => {
+              handler={() => {
                 addToCart(product);
               }}
               text="Add to cart"
-              styles="w-[100%]"
+              // styles="w-[100%]"
             />
           </div>
 
